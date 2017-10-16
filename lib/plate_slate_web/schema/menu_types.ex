@@ -3,6 +3,11 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
 
   alias PlateSlateWeb.Resolvers
 
+  object :menu_item_result do
+    field :menu_item, :menu_item
+    field :errors, list_of(:input_error)
+  end
+
   object :category do
     interfaces [:search_result]
     field :name, :string
@@ -53,7 +58,15 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
     field :id, :id
     field :name, :string
     field :description, :string
+    field :price, :decimal
     field :added_on, :date
+  end
+
+  input_object :menu_item_input do
+    field :name, non_null(:string)
+    field :description, :string
+    field :price, non_null(:decimal)
+    field :category_id, non_null(:id)
   end
 
 end
